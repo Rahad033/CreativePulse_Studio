@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 18, 2026 at 02:50 PM
+-- Generation Time: Nov 19, 2026 at 01:43 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.0.30
 
@@ -43,28 +43,41 @@ INSERT INTO `admins` (`id`, `username`, `password`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `clients`
+--
+
+CREATE TABLE `clients` (
+  `id` int(11) NOT NULL,
+  `full_name` varchar(100) NOT NULL,
+  `company_name` varchar(120) NOT NULL,
+  `email` varchar(120) NOT NULL,
+  `phone` varchar(30) NOT NULL,
+  `location` varchar(120) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `orders`
 --
 
 CREATE TABLE `orders` (
   `id` int(11) NOT NULL,
+  `client_id` int(11) NOT NULL,
   `client_name` varchar(100) NOT NULL,
-  `email` varchar(100) NOT NULL,
-  `service_type` varchar(50) NOT NULL,
+  `company_name` varchar(120) NOT NULL,
+  `email` varchar(120) NOT NULL,
+  `phone` varchar(30) NOT NULL,
+  `location` varchar(120) NOT NULL,
+  `service_type` varchar(100) NOT NULL,
   `budget` varchar(50) NOT NULL,
+  `deadline` date NOT NULL,
   `details` text NOT NULL,
   `status` varchar(30) DEFAULT 'Pending',
   `created_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `orders`
---
-
-INSERT INTO `orders` (`id`, `client_name`, `email`, `service_type`, `budget`, `details`, `status`, `created_at`) VALUES
-(1, 'Khulna Tech Hub', 'KhulnaTechHub@example.com', 'Branding/Logo', '5000', 'Need Professional Logo for our brand', 'Completed', '2026-11-17 12:36:49'),
-(2, 'NUBTK', 'Northern@gmail.com', 'Web Design', '15,000 BDT', 'Build the best ED website for the University', 'In Progress', '2026-11-18 13:23:51'),
-(3, 'JFB', 'JFB@gmail.com', 'Social Media', '30,000 BDT', 'Do your best work', 'Pending', '2026-11-18 13:24:37');
 
 --
 -- Indexes for dumped tables
@@ -75,6 +88,13 @@ INSERT INTO `orders` (`id`, `client_name`, `email`, `service_type`, `budget`, `d
 --
 ALTER TABLE `admins`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `clients`
+--
+ALTER TABLE `clients`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `email` (`email`);
 
 --
 -- Indexes for table `orders`
@@ -93,10 +113,16 @@ ALTER TABLE `admins`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
+-- AUTO_INCREMENT for table `clients`
+--
+ALTER TABLE `clients`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

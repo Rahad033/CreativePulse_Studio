@@ -1,12 +1,10 @@
 <?php
-// Local XAMPP MySQL Server Credentials
-$host   = "localhost";      // Your own computer
-$user   = "root";           // Default XAMPP MySQL username
-$pass   = "";               // Default XAMPP MySQL password (blank)
-$dbname = "agency_portal";  // Your local database name
+$host = "localhost";
+$user = "root";
+$pass = "";
+$db   = "agency_portal";
 
-// Connect to local MySQL
-$conn = mysqli_connect($host, $user, $pass, $dbname);
+$conn = mysqli_connect($host,$user, $pass,$db);
 
 if (!$conn) {
     die("Database connection failed: " . mysqli_connect_error());
